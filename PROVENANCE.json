@@ -1,0 +1,120 @@
+{
+  "package": "obix-core-reactive",
+  "dir": "core/obix-core-reactive",
+  "importedBy": "scripts/recovery/import-packages.mjs",
+  "snapshot": "snap-20260924T142414Z",
+  "stage": "stage-2 lift-and-shift (base owner; later stages repair/merge)",
+  "sources": [
+    {
+      "label": "upstream:obix-monorepo-2026@4e5295a",
+      "repo": "obix-monorepo-2026",
+      "url": "https://github.com/obinexusmk2/obix-monorepo-2026",
+      "sha": "4e5295a09e3799f5490e1d655e15ab4bf865fbf7",
+      "path": "packages/obix-adapter-reactive",
+      "license": "MIT",
+      "licenseFileUpstream": false,
+      "filesImported": 3,
+      "filesExcluded": 2
+    }
+  ],
+  "originalManifest": {
+    "name": "obix-adapter-reactive",
+    "version": "0.2.1",
+    "license": "MIT",
+    "bin": null,
+    "scripts": {
+      "build": "tsc -p tsconfig.json"
+    }
+  },
+  "transforms": [
+    "package.json regenerated (lockstep version, exact internal pins, exports with \"types\" first, standard scripts)",
+    "tsconfig.json generated (NodeNext via tsconfig.base.json; removeComments: true, as the Level-0 lineage was built (its dist purity tests grep emitted JS))",
+    "internal specifiers renamed: obix-ir×1→@obinexusltd/obix-core-ir, obix-effects×2→@obinexusltd/obix-core-scheduler/effects, obix-spec×1→@obinexusltd/obix-core-spec, obix-timer×1→@obinexusltd/obix-fixture-timer",
+    "relative imports given \".js\"/\"/index.js\" extensions: 0",
+    "dependencies added: @obinexusltd/obix-fixture-timer (imported by tests only → devDependency)",
+    "LICENSE generated from the declared MIT license (upstream repo had no LICENSE file)"
+  ],
+  "localFixes": [
+    {
+      "file": "src/index.ts",
+      "why": "scope (brief: do not add `replay` to the OBIX API; D-14): the trace-folding member is not part of the recovered public API"
+    },
+    {
+      "file": "src/index.ts",
+      "why": "scope (brief: do not add `replay` to the OBIX API; D-14): the trace-folding member is not part of the recovered public API"
+    },
+    {
+      "stage": "stage-3",
+      "files": [
+        "test/effects-lifecycle.test.mjs"
+      ],
+      "why": "tests only: effect cancellation, restart, props threading and subscription cleanup on a virtual clock"
+    },
+    {
+      "stage": "stage-6",
+      "files": [
+        "README.md"
+      ],
+      "why": "Stage 6 docs: the retired bare Level-0 names (npm tombstones: `npm install obix-parser` cannot work) replaced by the scoped package names (D-01, migration-table.md)."
+    },
+    {
+      "stage": "stage-7",
+      "files": [
+        "src/index.ts",
+        "test/reactive.test.mjs"
+      ],
+      "why": "Stage 7: exports defaultClock (and the Clock type) — the interval clock startEffects already defaulted to; the name of the published obix-adapter-reactive (D-39)."
+    },
+    {
+      "stage": "naming-migration",
+      "files": [
+        "package.json",
+        "README.md",
+        "src/index.ts"
+      ],
+      "why": "D-41: moved from binding/obix-binding-reactive (published as obix-adapter-reactive) into the core family; package.json description, README and the header comment name canonical packages only. No export, signature or behaviour changed (docs/recovery/naming-migration.md). The name obix-core-reactive is reused: the historical published contract (createReactive, mount) is incompatible and stays retired (D-40, D-42)."
+    }
+  ],
+  "scopeScrub": {
+    "rule": "scripts/recovery/scrub-rules.mjs (brief: no other OBINexus projects)",
+    "replacementsPerFile": {}
+  },
+  "authoredOverlay": [],
+  "excluded": [
+    "dist/**",
+    "node_modules/**",
+    "lockfiles",
+    "tsconfig*.json (regenerated)",
+    ".gitignore",
+    ".github/**",
+    "coverage/**"
+  ],
+  "unresolvedRelativeImports": [],
+  "note": "canonical-action Level-0 0.2.1 lineage (D-04(c)); ctx-style 0.3.0 compat is a shim in Stage 4",
+  "renamedFrom": [
+    {
+      "name": "@obinexusltd/obix-binding-reactive",
+      "dir": "binding/obix-binding-reactive",
+      "stage": "naming-migration",
+      "why": "the adapter family is migrated into core (obix-naming.json, docs/recovery/naming-migration.md): the paradigm projections are core packages; the previous canonical names @obinexusltd/obix-binding-{data,func,oop,reactive,ssr} remain as compatibility packages",
+      "earlierNames": [
+        "@obinexusltd/obix-adapter-reactive (published 0.3.0; now a compatibility package)",
+        "bare obix-adapter-reactive (Level-0, tombstoned on npm)"
+      ]
+    },
+    {
+      "name": "@obinexusltd/obix-core-reactive",
+      "dir": "core/obix-core-reactive",
+      "stage": "unscoped-naming",
+      "why": "D-102 (2026-09-29): OBIX packages are named without an npm scope — previous name @obinexusltd/obix-core-reactive, current name obix-core-reactive (docs/recovery/unscoped-migration.md); the directory, version and exports are unchanged"
+    }
+  ],
+  "export": {
+    "from": "https://github.com/obinexusmk2/obix-monorepo",
+    "branch": "recovery/obix-api-preserving-rebuild",
+    "commit": "69cafc94910c1add865a520877617ac307668875",
+    "directory": "core/obix-core-reactive",
+    "exportedBy": "scripts/release/export-repos.mjs",
+    "note": "a clean initial commit of this package; the monorepo history is not imported (D-103). Local machine paths in this record are replaced by <local workspace>."
+  }
+}
